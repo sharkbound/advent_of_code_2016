@@ -1,8 +1,6 @@
-from enum import Enum, auto
-
-from read import read, read_lines
-from util import make_dict
 import numpy as np
+
+from read import read_lines
 
 move_offsets = {
     'L': (-1, 0),
