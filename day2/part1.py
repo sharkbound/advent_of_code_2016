@@ -1,29 +1,44 @@
 from enum import Enum, auto
 
 from read import read, read_lines
-
-
-class Direction(Enum):
-    U = auto()
-    D = auto()
-    L = auto()
-    R = auto()
-
+from util import make_dict
+import numpy as np
 
 move_offsets = {
-    Direction.L: (-1, 0),
-    Direction.R: (1, 0),
-    Direction.U: (0, 1),
-    Direction.D: (0, -1),
+    'L': (-1, 0),
+    'R': (1, 0),
+    'U': (0, -1),
+    'D': (0, 1),
 }
+
+keys = np.array([
+    list('  1  '),
+    list(' 234 '),
+    list('56789'),
+    list(' ABC '),
+    list('  D  '),
+])
+
+
+def is_valid(x, y):
+    return all(i in range(5) for i in (x, y)) and keys[y, x] != ' '
 
 
 def solve(lines):
-    pass
+    ans = []
+    x, y = 0, 2
+    for line in lines:
+        for char in line:
+            if is_valid(x + (xoff := move_offsets[char][0]), y):
+                x += xoff
+            if is_valid(x, y + (yoff := move_offsets[char][1])):
+                y += yoff
+        ans.append(keys[y, x])
+    print(''.join(ans))
 
 
 def main():
-    data = read_lines('sample1.txt')
+    data = read_lines()
     solve(data)
 
 
