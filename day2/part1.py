@@ -10,21 +10,19 @@ move_offsets = {
 }
 
 keys = np.array([
-    list('  1  '),
-    list(' 234 '),
-    list('56789'),
-    list(' ABC '),
-    list('  D  '),
+    list('123'),
+    list('456'),
+    list('789'),
 ])
 
 
 def is_valid(x, y):
-    return all(i in range(5) for i in (x, y)) and keys[y, x] != ' '
+    return all(i in range(3) for i in (x, y))
 
 
 def solve(lines):
     ans = []
-    x, y = 0, 2
+    x, y = 1, 1
     for line in lines:
         for char in line:
             if is_valid(x + (xoff := move_offsets[char][0]), y):
