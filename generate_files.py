@@ -1,7 +1,12 @@
+from builtins import SystemError
 from pathlib import Path
+from sys import argv
 from typing import Union
 
-day = int(input('day? '))
+if len(argv) == 1:
+    day = int(input('day? '))
+else:
+    day = int(argv[1])
 
 
 def make_files(day_folder: Path, *files: Union[str, Path]):
